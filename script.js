@@ -141,7 +141,7 @@ desc.innerText=weatherData?.weather?.[0]?.description;/* bcz weather object had 
 multiple objects to represent multiple weather conditons eg. fog + liht rain here we are accessing 0 index */
 weatherIcon.src=`https://openweathermap.org/img/w/${weatherData?.weather?.[0]?.icon}.png`;
 temp.innerText = `${weatherData?.main?.temp} °C`;
-windSpeed.innerText=`${weatherData?.wind?.speed} ms⁻¹`;
+windSpeed.innerText=`${weatherData?.wind?.speed} m/s`;
 humidity.innerText=`${weatherData?.main?.humidity}%`;
 clouds.innerText=`${weatherData?.clouds?.all}%`;
 }
