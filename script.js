@@ -34,7 +34,8 @@ function switchTab(clickedTab){
    userInfoContainer.classList.remove("active");
    grantAccessContainer.classList.remove("active");
    searchForm.classList.add("active");
-   //Error Container If Any
+   /* We Applied it here and not in fetch function because during searching the error was still showing
+   and after searching when fetch function started then error was removed so it is preferred*/
    errorContainer.classList.remove("active");
    errorMsg.innerText="";
    goBackBtn.classList.remove("active");
@@ -46,7 +47,11 @@ function switchTab(clickedTab){
     grantAccessContainer.classList.remove("active");
     searchForm.classList.remove("active");
     getFromSessionStorage();/*for coordinates to check if we saved them in session storage*/
-       //Error Container If Any
+   /* Error Container If Any..We could have used it in fetch
+   function to write these lines only once but if permission not granted and there
+   was error during search and clicked back on  YourWeather so fetch function willnot
+   be executed bcz of location not accessed so we applied it here so that it must execute
+   wether fetch function worked or not */
    errorContainer.classList.remove("active");
    errorMsg.innerText="";
    goBackBtn.classList.remove("active");
@@ -186,10 +191,6 @@ searchForm.addEventListener("submit",e=>{
 async function fetchSearchWeatherInfo(city){
   grantAccessContainer.classList.remove("active");
 loadingScreen.classList.add("active");
-  //Remove Error if any
-  errorContainer.classList.remove("active");
-  errorMsg.innerText="";
-  goBackBtn.classList.remove("active");
 
 userInfoContainer.classList.remove("active");//old weather removed
 grantAccessContainer.classList.remove("active");
@@ -213,7 +214,10 @@ renderWeatherInfo(data);
 }
 
 catch(err){
-  console.error("Error fetching search weather info:", err);
+ /* If a particular Location is not supported then show error */
+ loadingScreen.classList.remove("active");
+ errorContainer.classList.add("active");
+ errorMsg.innerText="Geolocation is Not supported!!";
 }
 }
 
