@@ -34,8 +34,7 @@ function switchTab(clickedTab){
    userInfoContainer.classList.remove("active");
    grantAccessContainer.classList.remove("active");
    searchForm.classList.add("active");
-   /* We Applied it here and not in fetch function because during searching the error was still showing
-   and after searching when fetch function started then error was removed so it is preferred*/
+   /* remove if there is error showing still after switching */
    errorContainer.classList.remove("active");
    errorMsg.innerText="";
    goBackBtn.classList.remove("active");
@@ -46,12 +45,8 @@ function switchTab(clickedTab){
     userInfoContainer.classList.remove("active");
     grantAccessContainer.classList.remove("active");
     searchForm.classList.remove("active");
-    getFromSessionStorage();/*for coordinates to check if we saved them in session storage*/
-   /* Error Container If Any..We could have used it in fetch
-   function to write these lines only once but if permission not granted and there
-   was error during search and clicked back on  YourWeather so fetch function willnot
-   be executed bcz of location not accessed so we applied it here so that it must execute
-   wether fetch function worked or not */
+    getFromSessionStorage();
+    /* remove if there is error showing still after switching */
    errorContainer.classList.remove("active");
    errorMsg.innerText="";
    goBackBtn.classList.remove("active");
@@ -90,6 +85,11 @@ function getFromSessionStorage(){
 
 
 async function fetchUserWeatherInfo(coordss){
+  /* remove error if any */
+  errorContainer.classList.remove("active");
+  errorMsg.innerText="";
+  goBackBtn.classList.remove("active");
+
   const {lat , lon} = coordss;/*lat and lon properties from the coordss object 
   are compared to variable names and values are assigned to the variables lat and lon, respectively. */
 
@@ -189,6 +189,11 @@ searchForm.addEventListener("submit",e=>{
 
 
 async function fetchSearchWeatherInfo(city){
+    /* remove error if any */
+    errorContainer.classList.remove("active");
+    errorMsg.innerText="";
+    goBackBtn.classList.remove("active");
+    
   grantAccessContainer.classList.remove("active");
 loadingScreen.classList.add("active");
 
